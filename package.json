@@ -1,0 +1,22 @@
+{
+  "name": "quizserver",
+  "version": "1.0.0",
+  "description": "A Simple Quiz Server built using npm and client-sessions.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CruciformHawk7/QuizServer.git"
+  },
+  "author": "Nikhil Hari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CruciformHawk7/QuizServer/issues"
+  },
+  "homepage": "https://github.com/CruciformHawk7/QuizServer#readme",
+  "dependencies": {
+    "client-sessions": "^0.8.0"
+  }
+}
