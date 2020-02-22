@@ -8,17 +8,29 @@ const
 
 // prepare index, quiz, header, etc.
 // requires: index.html, quiz.html, header.html, [questions.csv]
-var indexFile, quizFile, headerFile;
+var indexFile, quizFile, headerFile, logFile;
+
+function logWrite(data) {
+    data += `${new Date().toString().slice(16, 24)}: `;
+    fs.appendFile('log.txt', data, (err) => {
+        if (err) console.log(`Error while writing log.`);
+    });
+}
 
 fs.readFile(`index.html`, `utf8`, (err, data) => {
-    if (err) console.log(`Failed to serve index.html`);
+    if (err) {
+        console.log(`Failed to serve index.html`);
+        logWrite(`Failed to server index.html`);
+    }
     indexFile = data;
 });
 
 fs.readFile(`quiz.part.html`, 'utf8', (err, data) => {
-    if (err) console.log(`Failed to serve quiz.part.html`);
+    if (err) {
+        console.log(`Failed to serve quiz.part.html`);
+        logWrite(`Failed to serve quiz.part.html`);
     quizFile = data;
-})
+});
 
 app.use(body.json());
 app.use(body.urlencoded({ extended: true }));
