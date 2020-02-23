@@ -12,6 +12,7 @@ var indexFile, quizFile, headerFile, logFile;
 
 function logWrite(data) {
     data += `${new Date().toString().slice(16, 24)}: `;
+    data += '\n';
     fs.appendFile('log.txt', data, (err) => {
         if (err) console.log(`Error while writing log.`);
     });
@@ -29,6 +30,7 @@ fs.readFile(`quiz.part.html`, 'utf8', (err, data) => {
     if (err) {
         console.log(`Failed to serve quiz.part.html`);
         logWrite(`Failed to serve quiz.part.html`);
+    }
     quizFile = data;
 });
 
@@ -55,14 +57,13 @@ app.post('/login', (request, response) => {
     console.log(`IP ${request.ip.toString().slice(7)} 
         is ${request.body.playerCode}`);
     response.end('done');
-    response.redirect('/');
 });
 
-app.get('/quiz', (response, redirect) => {
-    response.send(quizFile);
+app.get('/quiz', (_, response) => {
+    response.send(quizFile);    
 });
 
-app.post('/quizDone', function (request, response) {
+app.post('/quizDone', function (_, response) {
     //log data
     req.session_state.reset();
     response.redirect('/');
